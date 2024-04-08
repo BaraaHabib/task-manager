@@ -8,7 +8,7 @@ Manage tasks efficiently
 Task master code is separated to multiple modules
 
 ```
-├── Task master
+├── task_master
 │   ├── task_master_repo
 │   │   ├── task_master_storage
 │   ├── task_master_storage
