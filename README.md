@@ -4,7 +4,28 @@ Manage tasks efficiently
 
 ---
 
-## Getting Started 🚀
+## Modules 🚀
+Task master code is separated to multiple modules
+
+├── Task master
+│   ├── task_master_repo
+│   │   ├── task_master_storage
+│   ├── task_master_storage
+│   └── task_master_ui
+
+# task_master_ui 
+contain basic project ui components
+
+# task_master_repo
+use repository design pattern to connect to endpoints and uses
+task_master_storage to get tasks from local storage and other locally stored app data
+
+# task_master_storage
+Contains locally stored tasks and other app data like (token, userName ..)
+
+each one of this modules can be separately developed, tested, reused.
+
+## Start my app 🚀
 
 This project contains 2 environments:
 
@@ -69,7 +90,6 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
     <key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
-		<string>es</string>
 	</array>
 
     ...
