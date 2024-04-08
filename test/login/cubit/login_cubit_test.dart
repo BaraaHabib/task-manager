@@ -10,10 +10,10 @@ void main() {
     });
 
     blocTest<LoginCubit, LoginState>(
-      'emits [1] when increment is called',
+      'emits LogInStatusEnum.success when log in is tapped',
       build: LoginCubit.new,
       act: (cubit) => cubit.logIn(),
-      expect: () => [equals(1)],
+      expect: () => [true,],
     );
 
     // blocTest<CounterCubit, int>(
