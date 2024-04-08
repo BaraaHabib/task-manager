@@ -4,7 +4,7 @@ Manage tasks efficiently
 
 ---
 
-## Modules 🚀
+## Modules 
 Task master code is separated to multiple modules
 
 ```
@@ -27,7 +27,7 @@ Contains locally stored tasks and other app data like (token, userName ..)
 
 each one of this modules can be separately developed, tested, reused.
 
-## St 🚀
+## Run task master 🚀
 
 This project contains 2 environments:
 
