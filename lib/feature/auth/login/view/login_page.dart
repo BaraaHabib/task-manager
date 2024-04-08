@@ -94,6 +94,7 @@ class LoginView extends StatelessWidget {
 
                     // Login Button
                     PrimaryButton(
+                      key: const ValueKey('login'),
                       onPressed: context.read<LoginCubit>().logIn,
                       loading: state.loading,
                       content: Text(
