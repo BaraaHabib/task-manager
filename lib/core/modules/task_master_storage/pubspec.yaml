@@ -1,0 +1,14 @@
+name: task_master_storage
+description: Module to hold cash storage
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dev_dependencies:
+  mocktail: ^1.0.3
+  test: ^1.25.2
+  very_good_analysis: ^5.1.0
+dependencies:
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0

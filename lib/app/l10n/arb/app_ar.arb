@@ -1,0 +1,15 @@
+{
+  "taskMaster" : "Task master",
+  "flutter": "Flutter",
+  "welcomeBack" : "مرحباً من جديد",
+  "username": "اسم المستخدم",
+  "password": "كلمة المرور",
+  "continueWithTask": "متابعة",
+  "logIn": "تسجيل الدخول",
+  "rememberMe": "تذكرني",
+  "@flutter": {
+    "description": "Displays text Flutter",
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "taskMaster" : "Task master",
+  "flutter": "Flutter",
+  "welcomeBack" : "Welcome back!",
+  "username": "Username",
+  "password": "Password",
+  "continueWithTask": "continue with task",
+  "logIn": "Log in",
+  "rememberMe": "Remember Me",
+  "@flutter": {
+    "description": "Displays text Flutter",
+    "type": "text",
+    "placeholders": {}
+  }
+}
