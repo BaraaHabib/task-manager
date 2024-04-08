@@ -82,7 +82,9 @@ class _TasksViewState extends State<TasksView> {
         pagingController.appendPage(items, nextPageKey);
       }
 
-      showSuccessSnackBar(context, 'Offline mode');
+      if(state.local) {
+        showSuccessSnackBar(context, 'Offline mode');
+      }
     }
   }
 }
