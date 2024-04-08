@@ -46,6 +46,7 @@ dev_dependencies:
     sdk: flutter
   # Linter
   very_good_analysis: ^5.1.0
+  flutter_launcher_icons: "^0.13.1"
 
   # Code Generation
   build_runner: ^2.4.8
@@ -68,6 +69,11 @@ flutter:
     - assets/images/
     - assets/
 
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 flutter_intl:
   enabled: true
   class_name: AppLocalizations
