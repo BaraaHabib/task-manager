@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:task_master/locator.dart';
+// ignore: depend_on_referenced_packages
 import 'package:task_master_repo/src/tasks_repo/models/task_api_model.dart';
 
 part 'tasks_event.dart';
@@ -8,27 +11,43 @@ part 'tasks_state.dart';
 const pageSize = 2;
 
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
-  TasksBloc() : super(RemoteTasksLoading()) {
+  TasksBloc() : super(TasksLoading()) {
     on<TasksEvent>((event, emit) async {
       try {
         final res = await Locator.repo.tasks.getAll(
           page: event.page, perPage: pageSize,);
         if(res.success) {
+          await Locator.storage.setTasks(json.encode(res.data?.toJson()),);
           emit(
-            RemoteTasksLoaded(
+            TasksLoaded(
               items: res.data!.data,
               page: event.page,
             ),
           );
-        }else{
-          emit(
-            RemoteTasksError(
-              message: res.message ?? '',
-            ),
-          );
+        }else {
+          final localItems = Locator.storage.getTasks;
+
+          if (localItems != null) {
+            emit(
+              TasksLoaded(
+                items: TasksApiModel
+                    .fromJson(localItems)
+                    .data,
+                page: event.page,
+                local: true,
+              ),
+            );
+          } else {
+            emit(
+              TasksLoaded(
+                items: res.data!.data,
+                page: event.page,
+              ),
+            );
+          }
         }
       } on Exception catch (e) {
-        emit(RemoteTasksError(message: e.toString(),),);
+        emit(TasksError(message: e.toString(),),);
       }
     });
   }

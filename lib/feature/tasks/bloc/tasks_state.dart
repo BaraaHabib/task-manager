@@ -5,18 +5,18 @@ abstract class TasksState extends Equatable {
   const TasksState();
 }
 
-
-class RemoteTasksLoaded extends TasksState with EquatableMixin {
-  const RemoteTasksLoaded({this.items, this.page = 0,});
+class TasksLoaded extends TasksState with EquatableMixin {
+  const TasksLoaded({this.items, this.page = 0,this.local = false,});
 
   final List<TaskModel>? items;
   final int? page;
+  final bool local;
 
   ///
-  RemoteTasksLoaded appendItems({
+  TasksLoaded appendItems({
     List<TaskModel>? data,
   }) {
-    return RemoteTasksLoaded(
+    return TasksLoaded(
       items: data,
       page: page,
     );
@@ -26,14 +26,14 @@ class RemoteTasksLoaded extends TasksState with EquatableMixin {
   List<Object> get props => [];
 }
 
-class RemoteTasksLoading extends TasksState with EquatableMixin{
+class TasksLoading extends TasksState with EquatableMixin{
   @override
   List<Object?> get props => [];
 
 }
 
-class RemoteTasksError extends TasksState with EquatableMixin {
-  RemoteTasksError({required this.message});
+class TasksError extends TasksState with EquatableMixin {
+  TasksError({required this.message});
 
 
   @override

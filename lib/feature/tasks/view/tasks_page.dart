@@ -7,6 +7,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:task_master/app/l10n/l10n.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
 import 'package:task_master/core/extensions/string_extensions.dart';
+import 'package:task_master/core/modules/task_master_ui/lib/src/general/loading.dart';
+import 'package:task_master/core/modules/task_master_ui/lib/src/utils/toast.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
 import 'package:task_master/feature/tasks/tasks.dart';
 import 'package:task_master_repo/src/tasks_repo/models/task_api_model.dart';
@@ -50,6 +52,9 @@ class _TasksViewState extends State<TasksView> {
       body: BlocConsumer<TasksBloc, TasksState>(
         listener: _listener,
         builder: (context, state) {
+          if(state is TasksLoading){
+            return const LoadingWidget();
+          }
           return Padding(
             padding: const EdgeInsets.all(12),
             child: PagedListView<int, TaskModel>(
@@ -66,7 +71,7 @@ class _TasksViewState extends State<TasksView> {
   }
 
   void _listener(BuildContext ctx, TasksState state) {
-    if (state is RemoteTasksLoaded) {
+    if (state is TasksLoaded) {
       final currentPage = state.page ?? 0;
       final items = state.items ?? [];
       final isLastPage = state.items!.length < pageSize;
@@ -76,6 +81,8 @@ class _TasksViewState extends State<TasksView> {
         final nextPageKey = currentPage + state.items!.length;
         pagingController.appendPage(items, nextPageKey);
       }
+
+      showSuccessSnackBar(context, 'Offline mode');
     }
   }
 }

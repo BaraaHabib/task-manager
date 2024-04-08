@@ -7,3 +7,5 @@ const _tasksBox = 'TASKS';
 
 /// keys
 const _token = 'TOKEN';
+
+const _tasks = 'TOKEN';

@@ -17,6 +17,7 @@ void showErrorSnackBar(BuildContext context, String message) {
 void showSuccessSnackBar(BuildContext context, String message) {
   showTopSnackBar(
     Overlay.of(context),
+    displayDuration: const Duration(seconds: 1),
     CustomSnackBar.success(
       message: message,
     ),
