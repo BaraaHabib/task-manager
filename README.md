@@ -7,11 +7,13 @@ Manage tasks efficiently
 ## Modules 🚀
 Task master code is separated to multiple modules
 
+```
 ├── Task master
 │   ├── task_master_repo
 │   │   ├── task_master_storage
 │   ├── task_master_storage
 │   └── task_master_ui
+```
 
 # task_master_ui 
 contain basic project ui components
@@ -25,7 +27,7 @@ Contains locally stored tasks and other app data like (token, userName ..)
 
 each one of this modules can be separately developed, tested, reused.
 
-## Start my app 🚀
+## St 🚀
 
 This project contains 2 environments:
 
