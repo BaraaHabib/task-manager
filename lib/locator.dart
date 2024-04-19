@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:task_master/app/environment/app_environment.dart';
-import 'package:task_master/core/modules/task_master_repo/lib/src/network/network_client.dart';
-import 'package:task_master/core/modules/task_master_repo/lib/task_manager_repo.dart';
+import 'package:task_master_repo/task_manager_repo.dart';
 import 'package:task_master_storage/task_master_storage.dart';
 
 /// [Locator] is responsible for locating and registering all the

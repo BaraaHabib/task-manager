@@ -1,17 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:task_master/app/l10n/l10n.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
 import 'package:task_master/core/extensions/string_extensions.dart';
-import 'package:task_master/core/modules/task_master_ui/lib/src/general/loading.dart';
-import 'package:task_master/core/modules/task_master_ui/lib/src/utils/toast.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
 import 'package:task_master/feature/tasks/tasks.dart';
-import 'package:task_master_repo/src/tasks_repo/models/task_api_model.dart';
+import 'package:task_master_repo/task_manager_repo.dart';
+import 'package:task_master_ui/task_master_ui.dart';
 part './task_item.dart';
 
 @RoutePage()
@@ -22,7 +20,7 @@ class TasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => TasksBloc()..getTasks(),
-      child: TasksView(),
+      child: const TasksView(),
     );
   }
 }

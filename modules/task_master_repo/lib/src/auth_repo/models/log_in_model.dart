@@ -40,5 +40,6 @@ class LogInModel extends ApiSuccessModel {
   List<Object?> get props => [token,];
 
   @override
-  ApiSuccessModel fromJson(Map<String, dynamic> json) => LogInModel.fromJson(json);
+  ApiSuccessModel fromJson(Map<String, dynamic> json) =>
+      LogInModel.fromJson(json);
 }

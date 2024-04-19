@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:task_master/locator.dart';
-// ignore: depend_on_referenced_packages
-import 'package:task_master_repo/src/tasks_repo/models/task_api_model.dart';
+import 'package:task_master_repo/task_manager_repo.dart';
 
 part 'tasks_event.dart';
 part 'tasks_state.dart';

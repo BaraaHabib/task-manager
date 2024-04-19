@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_master/app/router/app_router.gr.dart';
-import 'package:task_master/core/assets/splash_assets.dart';
+import 'package:task_master/core/assets/general_assets.dart';
 
 import 'package:task_master/feature/splash/splash.dart';
 
@@ -43,7 +43,7 @@ class SplashView extends StatelessWidget {
           color: Colors.white,
           child: Image.asset(
             height: 1.sh,
-            SplashAssets.splashLogo,
+            GeneralAssets.logo,
           ),
         );
       },

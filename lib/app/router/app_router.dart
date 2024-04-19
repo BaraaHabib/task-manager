@@ -14,11 +14,6 @@ final class AppRouter extends $AppRouter {
           page: SplashPage.page,
         ),
         CustomRoute(
-          page: HomeRoute.page,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          durationInMilliseconds: 300,
-        ),
-        CustomRoute(
           page: LoginPage.page,
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,

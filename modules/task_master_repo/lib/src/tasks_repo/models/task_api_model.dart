@@ -1,11 +1,5 @@
 import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 
-/// page : 0
-/// per_page : 0
-/// total : 0
-/// total_pages : 0
-/// data : [{"id":0,"name":"string","year":0,"color":"string","pantone_value":"string"}]
-
 ///
 class TasksApiModel extends ApiSuccessModel {
 

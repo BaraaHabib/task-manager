@@ -48,6 +48,7 @@ app.*.map.json
 *.gr.dart
 *.freezed.dart
 *.config.dart
+pubspec_overrides.yaml
 
 # environment variables
 # /environment/

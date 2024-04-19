@@ -1,7 +1,7 @@
 import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 
 /// {@template login_params}
-/// Auth repo responsible for authenticating users
+/// login api requests parameters
 /// {@endtemplate}
 class LogInParams extends ParamsModel<LogInParamsBody> {
 
@@ -25,7 +25,6 @@ class LogInParams extends ParamsModel<LogInParamsBody> {
 }
 
 /// {@template login_params_body}
-/// Auth repo responsible for authenticating users
 /// {@endtemplate}
 class LogInParamsBody extends BaseBodyModel {
 

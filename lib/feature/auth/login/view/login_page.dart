@@ -7,12 +7,10 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:task_master/app/l10n/l10n.dart';
 import 'package:task_master/app/router/app_router.gr.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
-import 'package:task_master/core/modules/task_master_ui/lib/src/task_master_ui.dart';
-import 'package:task_master/core/modules/task_master_ui/lib/src/utils/toast.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
 import 'package:task_master/feature/auth/login/helpers/field_names.dart';
-
 import 'package:task_master/feature/auth/login/login.dart';
+import 'package:task_master_ui/task_master_ui.dart';
 
 @RoutePage()
 class LoginPage extends StatelessWidget {

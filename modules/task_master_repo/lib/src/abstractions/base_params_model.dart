@@ -17,7 +17,7 @@ enum RequestType {
 
 /// {@template params_model}
 /// Base parameters mode, create a class that extend this class
-/// override all required props tp pass it to api call
+/// override all required props then pass it to api call
 /// {@endtemplate}
 abstract class ParamsModel<BodyModelType extends BaseBodyModel>
     extends Equatable {

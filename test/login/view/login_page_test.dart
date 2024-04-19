@@ -9,11 +9,24 @@ import 'package:task_master/feature/splash/splash.dart';
 import '../../helpers/helpers.dart';
 
 class MockLoginCubit extends MockCubit<LoginState> implements LoginCubit {}
+class MockSplashCubit extends MockCubit<SplashState> implements SplashCubit {}
 
 void main() {
   group('SplashPage', () {
+    late SplashCubit splashCubit;
+
+    setUp(() {
+      splashCubit = MockSplashCubit();
+    });
+
     testWidgets('renders SplashPage', (tester) async {
-      await tester.pumpApp(const SplashPage());
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await tester.pumpApp(
+        BlocProvider.value(
+          value: splashCubit,
+          child: const SplashPage(),
+        ),
+      );
       expect(find.byType(SplashPage), findsOneWidget);
     });
   });

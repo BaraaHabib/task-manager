@@ -1,0 +1,22 @@
+name: task_master
+repository: https://github.com/BaraaHabib/task-master
+skkPath: auto
+
+packages:
+  - modules/*
+  - '*'
+
+command:
+  version:
+    branch: main
+
+scripts:
+  fget:
+    run: melos exec --flutter flutter pub get
+    description: run flutter pub get for all flutter projects
+  dget:
+    run: melos exec --no-flutter dart pub get
+    description: run dart pub get for all dart projects
+  unused_import:
+    run: melos exec dart fix --apply --code=unused_import
+    description: remove unused imports in all projects
