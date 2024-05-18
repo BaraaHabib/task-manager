@@ -1,14 +1,19 @@
 part of '../task_master_storage.dart';
 
 /// methods to manipulate app state data
-mixin AppStateStorageMixin{
+extension AppStateStorageMixin on TaskMasterStorage{
 
-  /// get session token
-  String? get getToken =>
-      TaskMasterStorage.appState.get(_token,) as String?;
+  /// get session data as json
+  Map<String, dynamic>? get getUserData {
+    final sJson = appState.get(_tasks,) as String?;
+    if (sJson is String) {
+      return json.decode(sJson) as Map<String, dynamic>;
+    }
+    return null;
+  }
 
   /// set session token
-  Future<void> setToken(String? token) async =>
-      TaskMasterStorage.appState.put(_token, token);
+  Future<void> setUserData(String? data) async =>
+      appState.put(_token, data);
 
 }

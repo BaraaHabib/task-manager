@@ -8,36 +8,40 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200.h,
+      // height: 200.h,
       padding: EdgeInsets.all(8.r),
-      margin:  EdgeInsets.symmetric(vertical: 5.h,),
-      decoration: BoxDecoration(
-        color: task.color.toHex(),
-        borderRadius: BorderRadius.circular(15),
+      margin: EdgeInsets.symmetric(
+        vertical: 5.h,
       ),
-      child: Wrap(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: Colors.black.withAlpha(
+              50,
+            ),
+          ),),
+      child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            task.name,
-              style: context
-                  .textTheme
-                  .displayMedium
-                  ?.copyWith(color: Colors.white),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  task.title,
+                  style: context.textTheme.titleLarge,
+                ),
+              ),
+            ],
           ),
-          Text(
-            task.pantoneValue,
-            style: context
-                .textTheme
-                .displaySmall
-                ?.copyWith(color: Colors.white),
-          ),
-          Text(
-            task.year.toString(),
-            style: context
-                .textTheme
-                .displaySmall
-                ?.copyWith(color: Colors.white),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CupertinoCheckbox(
+                value: task.completed,
+                checkColor: context.theme.primaryColor,
+                onChanged: (s) {},
+              ),
+            ],
           ),
         ],
       ),

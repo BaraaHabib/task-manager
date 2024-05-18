@@ -10,6 +10,7 @@ import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 import 'package:task_master_repo/src/resources/configuration.dart';
 import 'package:task_master_repo/src/resources/exceptions.dart';
+import 'package:task_master_repo/task_manager_repo.dart';
 import 'package:task_master_storage/task_master_storage.dart';
 
 part 'base_headers.dart';
@@ -31,7 +32,19 @@ final class NetworkClient {
     _dio.options.sendTimeout = const Duration(minutes: 1);
     _dio.options.receiveTimeout = const Duration(minutes: 1);
 
-    _dio.interceptors.add(RetryInterceptor(dio: _dio));
+
+    /// add authorization interceptor
+    final data = storage?.getUserData;
+    final logInModel = LogInModel.fromJson(data ?? {});
+    _dio.interceptors.add(BasicAuthInterceptor(token: logInModel.token,));
+    ///
+
+    _dio.interceptors.add(
+        RetryInterceptor(
+          dio: _dio,
+          retries: 0,
+        ),
+    );
     if (logging) {
       _dio.interceptors.add(
         PrettyDioLogger(
@@ -170,28 +183,6 @@ final class NetworkClient {
     return response;
   }
 
-  Future<void> _authorizeRequest() async {
-    final token = TaskMasterStorage.instance.getToken;
-    headers.update(
-      'Authorization',
-          (V) => 'Bearer $token',
-      ifAbsent: () => 'Bearer $token',
-    );
-  }
-
-  void _unAuthorizeRequest() {
-    headers.removeWhere((k, v) => k == 'Authorization',
-    );
-  }
-
-  ///
-  Future<void> _preRequest(ParamsModel model) async {
-    if (model.authorized) {
-      await _authorizeRequest();
-    } else {
-      _unAuthorizeRequest();
-    }
-  }
 
   ///
   Future<ApiResponseModel<T>> performRequest<T extends ApiSuccessModel>(
@@ -199,26 +190,34 @@ final class NetworkClient {
       {
         required T Function(Map<String, dynamic>) parser,
       }) async {
-    await _preRequest(model);
     Response response;
     try {
       var url = model.baseUrl ?? _baseUrl;
       url = url + model.url.toString();
       final allHeaders = headers..addAll(model.additionalHeaders);
+      final queryParameters = model.urlParams;
       final body = model.body?.toJson();
+      final options = Options(
+        headers: allHeaders,
+      );
       switch (model.requestType!) {
         case RequestType.get:
-          response = await get(url, queryParameters: allHeaders,);
+          response =
+          await get(url, queryParameters: queryParameters, options: options);
           break;
         case RequestType.post:
           response =
-          await post(url, data: body, queryParameters: allHeaders,);
+          await post(url, data: body,
+              queryParameters: queryParameters,
+              options: options,);
           break;
         case RequestType.delete:
-          response = await delete(url, queryParameters: allHeaders,);
+          response =
+          await delete(url, queryParameters: queryParameters, options: options);
           break;
         case RequestType.put:
-          response = await put(url, queryParameters: allHeaders,);
+          response =
+          await put(url, queryParameters: queryParameters, options: options);
           break;
       }
       final data = parser.call(_returnResponse(response));

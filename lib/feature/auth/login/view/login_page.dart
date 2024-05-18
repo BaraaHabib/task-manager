@@ -32,6 +32,10 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormBuilder(
       key: context.read<LoginCubit>().formState,
+      initialValue: {
+        LogInFieldNames.userName.name: 'atuny0',
+        LogInFieldNames.password.name: '9uQFF1Lh',
+      },
       child: BlocConsumer<LoginCubit, LoginState>(
         listenWhen: _stateHasChanged,
         listener: _listener,
@@ -119,7 +123,9 @@ class LoginView extends StatelessWidget {
     if (state.status == LogInStatusEnum.error) {
       showErrorSnackBar(context, state.errorMessage ?? '');
     } else if (state.status == LogInStatusEnum.success) {
-      context.read<AppStateCubit>().logIn(state.token!);
+      context.read<AppStateCubit>().logIn(
+            state.data!,
+          );
       AutoRouter.of(context).replace(const TasksPage());
     }
   }

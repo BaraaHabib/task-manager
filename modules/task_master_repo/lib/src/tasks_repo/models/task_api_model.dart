@@ -5,24 +5,21 @@ class TasksApiModel extends ApiSuccessModel {
 
   ///
   TasksApiModel({
-    num page = 1,
-    num perPage = 10,
-    num total = 0,
-    num totalPages = 0,
+    int skip = 1,
+    int limit = 10,
+    int total = 0,
     List<TaskModel> data = const [],
   }) {
-    _page = page;
-    _perPage = perPage;
+    _skip = skip;
+    _limit = limit;
     _total = total;
-    _totalPages = totalPages;
     _data = data;
   }
 
   TasksApiModel.fromJson(Map<String, dynamic> json) {
-    _page = json['page'] as num;
-    _perPage = json['per_page'] as num;
-    _total = json['total'] as num;
-    _totalPages = json['total_pages'] as num;
+    _skip = json['skip'] as int;
+    _limit = json['limit'] as int;
+    _total = json['total'] as int;
     if (json['data'] is List) {
       // ignore: inference_failure_on_function_invocation
       final list = json['data'] as List;
@@ -34,38 +31,34 @@ class TasksApiModel extends ApiSuccessModel {
     }
   }
 
-  late final num? _page;
-  late final num? _perPage;
-  late final num? _total;
-  late final num? _totalPages;
+  late final int? _total;
+  late final int? _skip;
+  late final int? _limit;
   late final List<TaskModel>? _data;
 
   ///
   TasksApiModel copyWith({
-    num? page,
-    num? perPage,
-    num? total,
-    num? totalPages,
+    int? skip,
+    int? limit,
+    int? total,
+    int? totalPages,
     List<TaskModel>? data,
   }) =>
-      TasksApiModel(page: page ?? _page!,
-        perPage: perPage ?? _perPage!,
-        total: total ?? _total!,
-        totalPages: totalPages ?? _totalPages!,
-        data: data ?? _data!,
+      TasksApiModel(
+        skip: skip ?? this.skip,
+        total: total ?? this.total,
+        limit: limit ?? this.limit,
+        data: data ?? this.data,
       );
 
   ///
-  num get page => _page ?? 1;
+  int get skip => _skip ?? 0;
 
   ///
-  num get perPage => _perPage ?? 10;
+  int get limit => _limit ?? 0;
 
   ///
-  num get total => _total ?? 0;
-
-  ///
-  num get totalPages => _totalPages ?? 0;
+  int get total => _total ?? 0;
 
   ///
   List<TaskModel> get data => _data ?? [];
@@ -73,10 +66,9 @@ class TasksApiModel extends ApiSuccessModel {
   ///
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['page'] = _page;
-    map['per_page'] = _perPage;
+    map['skip'] = _skip;
+    map['limit'] = _limit;
     map['total'] = _total;
-    map['total_pages'] = _totalPages;
     if (_data != null) {
       map['data'] = _data?.map((v) => v.toJson()).toList() ?? [];
     }
@@ -88,84 +80,76 @@ class TasksApiModel extends ApiSuccessModel {
       TasksApiModel.fromJson(json);
 
   @override
-  List<Object?> get props => [_page, _perPage, _total, _totalPages,];
+  List<Object?> get props => [_skip, _limit, _total,];
 
 }
 
 /// id : 0
-/// name : "string"
-/// year : 0
-/// color : "string"
-/// pantone_value : "string"
+///       "id": 13,
+///       "to Do": "Buy a new house decoration",
+///      "completed": false,
+///      "userId": 16
 
 class TaskModel {
   ///
   TaskModel({
-    num? id,
-    String? name,
-    num? year,
-    String? color,
-    String? pantoneValue,
+    int? id,
+    String? todo,
+    bool? completed,
+    int? userId,
   }) {
     _id = id;
-    _name = name;
-    _year = year;
-    _color = color;
-    _pantoneValue = pantoneValue;
+    _title = todo;
+    _completed = completed;
+    _userId = userId;
   }
 
   ///
   TaskModel.fromJson(Map<String, dynamic> json) {
-    _id = json['id'] as num?;
-    _name = json['name'] as String?;
-    _year = json['year'] as num?;
-    _color = json['color'] as String?;
-    _pantoneValue = json['pantone_value'] as String?;
+    _id = json['id'] as int?;
+    _title = json['todo'] as String?;
+    _completed = json['completed'] as bool?;
+    _userId = json['userId'] as int?;
   }
 
-  num? _id;
-  String? _name;
-  num? _year;
-  String? _color;
-  String? _pantoneValue;
+  int? _id;
+  String? _title;
+  bool? _completed;
+  int? _userId;
 
   ///
-  TaskModel copyWith({ num? id,
-    String? name,
-    num? year,
-    String? color,
-    String? pantoneValue,
+  TaskModel copyWith({
+    int? id,
+    String? todo,
+    bool? completed,
+    int? userId,
   }) =>
-      TaskModel(id: id ?? _id,
-        name: name ?? _name,
-        year: year ?? _year,
-        color: color ?? _color,
-        pantoneValue: pantoneValue ?? _pantoneValue,
+      TaskModel(
+        id: id ?? _id,
+        todo: todo ?? _title,
+        completed: completed ?? _completed,
+        userId: userId ?? _userId,
       );
 
   ///
-  num get id => _id ?? 0;
+  int get id => _id ?? 0;
 
   ///
-  String get name => _name ?? '';
+  String get title => _title ?? '';
 
   ///
-  num get year => _year ?? 0;
+  bool get completed => _completed ?? false;
 
   ///
-  String get color => _color ?? '';
-
-  ///
-  String get pantoneValue => _pantoneValue ?? '';
+  int get userId => _userId ?? -1;
 
   ///
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['name'] = _name;
-    map['year'] = _year;
-    map['color'] = _color;
-    map['pantone_value'] = _pantoneValue;
+    map['todo'] = _title;
+    map['completed'] = _completed;
+    map['userId'] = _userId;
     return map;
   }
 

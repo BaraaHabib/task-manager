@@ -6,7 +6,7 @@ class LoginState extends Equatable {
   const LoginState({
     required this.status,
     this.errorMessage,
-    this.token,
+    this.data,
   });
 
   factory LoginState.init() => const LoginState(
@@ -20,23 +20,23 @@ class LoginState extends Equatable {
 
   final String? errorMessage;
 
-  final String? token;
+  final LogInModel? data;
 
   @override
   List<Object> get props => [
         status,
         errorMessage ?? '',
-        token ?? '',
+        data ?? '',
       ];
 
   LoginState copyWith({
     LogInStatusEnum? status,
     String? errorMessage,
-    String? token,
+    LogInModel? data,
   }) {
     return LoginState(
       status: status ?? this.status,
-      token: token ?? this.token,
+      data: data ?? this.data,
       errorMessage: errorMessage ?? '',
     );
   }

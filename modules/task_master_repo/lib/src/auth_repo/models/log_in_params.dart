@@ -4,7 +4,6 @@ import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 /// login api requests parameters
 /// {@endtemplate}
 class LogInParams extends ParamsModel<LogInParamsBody> {
-
   /// {@macro login_params}
   const LogInParams({super.body});
 
@@ -15,19 +14,21 @@ class LogInParams extends ParamsModel<LogInParamsBody> {
   RequestType? get requestType => RequestType.post;
 
   @override
-  String? get url => 'login';
+  String? get url => 'auth/login';
 
   @override
   Map<String, String> get urlParams => {};
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];
+
+  @override
+  bool get authorized => false;
 }
 
 /// {@template login_params_body}
 /// {@endtemplate}
 class LogInParamsBody extends BaseBodyModel {
-
   /// {@macro login_params_body}
   LogInParamsBody({
     this.userName,
@@ -42,7 +43,7 @@ class LogInParamsBody extends BaseBodyModel {
 
   @override
   Map<String, dynamic> toJson() => {
-    'username': userName,
-    'password': password,
-  };
+        'username': userName,
+        'password': password,
+      };
 }

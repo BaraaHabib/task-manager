@@ -1,7 +1,7 @@
 import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 
 /// {@template get_all_tasks_params}
-/// Auth repo responsible for authenticating users
+/// add to do api parameters
 /// {@endtemplate}
 class AddTaskParams extends ParamsModel<AddTaskParamsBody> {
 
@@ -15,7 +15,7 @@ class AddTaskParams extends ParamsModel<AddTaskParamsBody> {
   RequestType? get requestType => RequestType.get;
 
   @override
-  String? get url => 'resources';
+  String? get url => 'todos/add';
 
   @override
   Map<String, String> get urlParams => {};
@@ -25,13 +25,30 @@ class AddTaskParams extends ParamsModel<AddTaskParamsBody> {
 }
 
 /// {@template get_all_params_body}
-/// Auth repo responsible for authenticating users
+/// add to do api post body parameters
 /// {@endtemplate}
 class AddTaskParamsBody extends BaseBodyModel {
 
   /// {@macro get_all_params_body}
-  AddTaskParamsBody();
+  AddTaskParamsBody({
+    required this.todo,
+    required this.completed,
+    required this.userId,
+  });
+
+  /// task name
+  final String todo;
+
+  /// is task completed
+  final bool completed;
+
+  /// is user task id
+  final int userId;
 
   @override
-  Map<String, dynamic> toJson() => { };
+  Map<String, dynamic> toJson() => {
+    'todo' : todo,
+    'completed' : completed,
+    'userId' : userId,
+  };
 }

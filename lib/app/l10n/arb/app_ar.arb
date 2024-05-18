@@ -7,6 +7,7 @@
   "continueWithTask": "متابعة",
   "logIn": "تسجيل الدخول",
   "rememberMe": "تذكرني",
+  "noTasks": "لا يوجد مهمات بعد",
   "@flutter": {
     "description": "Displays text Flutter",
     "type": "text",

@@ -49,6 +49,96 @@ class AppLocalizations {
   static AppLocalizations? maybeOf(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
+
+  /// `Task master`
+  String get taskMaster {
+    return Intl.message(
+      'Task master',
+      name: 'taskMaster',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flutter`
+  String get flutter {
+    return Intl.message(
+      'Flutter',
+      name: 'flutter',
+      desc: 'Displays text Flutter',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `continue with task`
+  String get continueWithTask {
+    return Intl.message(
+      'continue with task',
+      name: 'continueWithTask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get logIn {
+    return Intl.message(
+      'Log in',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember Me`
+  String get rememberMe {
+    return Intl.message(
+      'Remember Me',
+      name: 'rememberMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tasks yet`
+  String get noTasks {
+    return Intl.message(
+      'No tasks yet',
+      name: 'noTasks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -57,6 +147,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 

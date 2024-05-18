@@ -1,5 +1,3 @@
-
-
 import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 
 /// {@template auth_repo}
@@ -9,35 +7,73 @@ class LogInModel extends ApiSuccessModel {
 
   /// {@macro auth_repo}
   const LogInModel({
-    required String token,
-  }) : _token = token;
+    this.id,
+    this.username,
+    this.email,
+    this.firstName,
+    this.lastName,
+    this.gender,
+    this.image,
+    this.token,
+  });
+
+  /// {@macro auth_repo}
+  factory LogInModel.fromJson(Map<String, dynamic> json) {
+    return LogInModel(
+      id: json['id'] as int?,
+      username: json['username'] as String?,
+      email: json['email'] as String?,
+      token: json['email'] as String?,
+      firstName: json['email'] as String?,
+      gender: json['email'] as String?,
+      image: json['email'] as String?,
+      lastName: json['email'] as String?,
+    );
+  }
 
   ///
-  LogInModel.fromJson(Map<String, dynamic> json)
-      : _token = json['token']?.toString();
-
-  final String? _token;
+  final int? id;
 
   ///
-  LogInModel copyWith({
-    String? token,
-  }) =>
-      LogInModel(
-        token: token ?? _token ?? '',
-      );
+  final String? username;
 
   ///
-  String? get token => _token;
+  final String? email;
+
+  ///
+  final String? firstName;
+
+  ///
+  final String? lastName;
+
+  ///
+  final String? gender;
+
+  ///
+  final String? image;
+
+  ///
+  final String? token;
 
   ///
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['token'] = _token;
-    return map;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['username'] = username;
+    data['email'] = email;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['gender'] = gender;
+    data['image'] = image;
+    data['token'] = token;
+    return data;
   }
 
   @override
-  List<Object?> get props => [token,];
+  List<Object?> get props =>
+      [
+        id,
+      ];
 
   @override
   ApiSuccessModel fromJson(Map<String, dynamic> json) =>

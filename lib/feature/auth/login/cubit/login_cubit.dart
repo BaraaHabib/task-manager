@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:task_master/feature/auth/login/helpers/field_names.dart';
 import 'package:task_master/locator.dart';
+import 'package:task_master_repo/task_manager_repo.dart';
 
 part 'login_state.dart';
 
@@ -31,7 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(
           state.copyWith(
             status: LogInStatusEnum.success,
-            token: res.data?.token,
+            data: res.data,
           ),
         );
       } else {

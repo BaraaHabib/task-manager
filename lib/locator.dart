@@ -24,7 +24,7 @@ abstract final class Locator {
   /// Responsible for registering all the dependencies
   static Future<void> locateServices(
       {required AppEnvironment environment,}) async {
-    final taskMasterStorage = await TaskMasterStorage.init();
+    final taskMasterStorage = await TaskMasterStorage().init();
     instance
     // register local storage service
       ..registerLazySingleton(() => taskMasterStorage,)

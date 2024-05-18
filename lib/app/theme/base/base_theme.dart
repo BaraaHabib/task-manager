@@ -41,7 +41,7 @@ abstract class BaseTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      primaryColor: Colors.white,
+      primaryColor: primaryColor,
       buttonTheme: const ButtonThemeData(
         buttonColor: Colors.blue,
         textTheme: ButtonTextTheme.primary,

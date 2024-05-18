@@ -15,8 +15,12 @@ class TasksRepo implements ITasksRepo {
     required int page,
     required int perPage,
   }) {
+
     return networkClient.performRequest<TasksApiModel>(
-      const GetAllTasksParams(),
+      GetAllTasksParams(
+        limit: perPage,
+        skip: page * perPage,
+      ),
       parser: TasksApiModel.fromJson,
     );
   }
