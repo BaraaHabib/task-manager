@@ -44,8 +44,6 @@ app.*.map.json
 /android/app/release
 
 # generated files
-*.g.dart 
-*.gr.dart
 *.freezed.dart
 *.config.dart
 pubspec_overrides.yaml
