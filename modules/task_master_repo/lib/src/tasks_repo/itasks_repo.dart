@@ -9,5 +9,14 @@ abstract class ITasksRepo {
 
   /// get all tasks
   Future<ApiResponseModel<TasksApiModel>> getAll(
-      {required int page, required int perPage,});
+      {required int page, required int perPage, required int id,});
+
+  /// add new task
+  Future<ApiResponseModel<TaskModel>> addUpdate(
+      {
+        required String title,
+        required bool completed,
+        required int userId,
+        int? id,
+      });
 }

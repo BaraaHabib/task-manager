@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_master/app/constants/string_constants.dart';
-import 'package:task_master/app/l10n/l10n.dart';
+import 'package:task_master/app/generated/l10n.dart';
 import 'package:task_master/app/router/app_router.dart';
 import 'package:task_master/app/theme/dark/dark_theme.dart';
 import 'package:task_master/app/theme/light/light_theme.dart';
@@ -29,8 +29,8 @@ class App extends StatelessWidget {
           darkTheme: DarkTheme().theme,
 
           // Localization
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [AppLocalizations.delegate,],
+          supportedLocales: AppLocalizations.delegate.supportedLocales,
 
           // Routing
           routerConfig: _appRouter.config(),

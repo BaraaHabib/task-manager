@@ -185,7 +185,7 @@ final class NetworkClient {
 
 
   ///
-  Future<ApiResponseModel<T>> performRequest<T extends ApiSuccessModel>(
+  Future<ApiResponseModel<T>> performRequest<T extends ApiModel>(
       ParamsModel model,
       {
         required T Function(Map<String, dynamic>) parser,
@@ -208,8 +208,8 @@ final class NetworkClient {
         case RequestType.post:
           response =
           await post(url, data: body,
-              queryParameters: queryParameters,
-              options: options,);
+            queryParameters: queryParameters,
+            options: options,);
           break;
         case RequestType.delete:
           response =
@@ -217,7 +217,10 @@ final class NetworkClient {
           break;
         case RequestType.put:
           response =
-          await put(url, queryParameters: queryParameters, options: options);
+          await put(url, data: body,
+              queryParameters: queryParameters,
+              options: options,
+          );
           break;
       }
       final data = parser.call(_returnResponse(response));

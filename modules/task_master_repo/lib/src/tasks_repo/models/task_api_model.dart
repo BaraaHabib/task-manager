@@ -1,40 +1,38 @@
 import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 
 ///
-class TasksApiModel extends ApiSuccessModel {
+class TasksApiModel extends ApiModel {
 
   ///
-  TasksApiModel({
-    int skip = 1,
-    int limit = 10,
-    int total = 0,
-    List<TaskModel> data = const [],
-  }) {
-    _skip = skip;
-    _limit = limit;
-    _total = total;
-    _data = data;
-  }
+  const TasksApiModel(
+      this._total,
+      this._skip,
+      this._limit,
+      this._data,
+  ) ;
 
-  TasksApiModel.fromJson(Map<String, dynamic> json) {
-    _skip = json['skip'] as int;
-    _limit = json['limit'] as int;
-    _total = json['total'] as int;
-    if (json['data'] is List) {
+  factory TasksApiModel.fromJson(Map<String, dynamic> json) {
+    final tData = <TaskModel>[];
+    if (json['todos'] is List) {
       // ignore: inference_failure_on_function_invocation
-      final list = json['data'] as List;
-      _data = [];
+      final list = json['todos'] as List;
       // ignore: avoid_dynamic_calls
-      for(final item in list){
-        _data?.add(TaskModel.fromJson(item as Map<String, dynamic>));
+      for (final item in list) {
+        tData.add(TaskModel.fromJson(item as Map<String, dynamic>));
       }
     }
+    return TasksApiModel(
+        json['total'] as int,
+        json['skip'] as int,
+        json['limit'] as int,
+        tData,
+    );
   }
 
-  late final int? _total;
-  late final int? _skip;
-  late final int? _limit;
-  late final List<TaskModel>? _data;
+  final int? _total;
+  final int? _skip;
+  final int? _limit;
+  final List<TaskModel>? _data;
 
   ///
   TasksApiModel copyWith({
@@ -45,10 +43,10 @@ class TasksApiModel extends ApiSuccessModel {
     List<TaskModel>? data,
   }) =>
       TasksApiModel(
-        skip: skip ?? this.skip,
-        total: total ?? this.total,
-        limit: limit ?? this.limit,
-        data: data ?? this.data,
+        total ?? this.total,
+        skip ?? this.skip,
+        limit ?? this.limit,
+        data ?? this.data,
       );
 
   ///
@@ -70,13 +68,13 @@ class TasksApiModel extends ApiSuccessModel {
     map['limit'] = _limit;
     map['total'] = _total;
     if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList() ?? [];
+      map['todos'] = _data?.map((v) => v.toJson()).toList() ?? [];
     }
     return map;
   }
 
   @override
-  ApiSuccessModel fromJson(Map<String, dynamic> json) =>
+  ApiModel fromJson(Map<String, dynamic> json) =>
       TasksApiModel.fromJson(json);
 
   @override
@@ -90,32 +88,30 @@ class TasksApiModel extends ApiSuccessModel {
 ///      "completed": false,
 ///      "userId": 16
 
-class TaskModel {
+class TaskModel extends ApiModel {
   ///
-  TaskModel({
-    int? id,
-    String? todo,
-    bool? completed,
-    int? userId,
-  }) {
-    _id = id;
-    _title = todo;
-    _completed = completed;
-    _userId = userId;
-  }
+  const TaskModel(
+      this._id,
+      this._title,
+      // ignore: avoid_positional_boolean_parameters
+      this._completed,
+      this._userId,
+      );
 
   ///
-  TaskModel.fromJson(Map<String, dynamic> json) {
-    _id = json['id'] as int?;
-    _title = json['todo'] as String?;
-    _completed = json['completed'] as bool?;
-    _userId = json['userId'] as int?;
+  factory TaskModel.fromJson(Map<String, dynamic> json) {
+    return TaskModel(
+      json['id'] as int?,
+      json['todo'] as String?,
+      json['completed'] as bool?,
+      json['userId'] as int?,
+    );
   }
 
-  int? _id;
-  String? _title;
-  bool? _completed;
-  int? _userId;
+  final int? _id;
+  final String? _title;
+  final bool? _completed;
+  final int? _userId;
 
   ///
   TaskModel copyWith({
@@ -125,10 +121,10 @@ class TaskModel {
     int? userId,
   }) =>
       TaskModel(
-        id: id ?? _id,
-        todo: todo ?? _title,
-        completed: completed ?? _completed,
-        userId: userId ?? _userId,
+        id ?? _id,
+        todo ?? _title,
+        completed ?? _completed,
+        userId ?? _userId,
       );
 
   ///
@@ -152,5 +148,11 @@ class TaskModel {
     map['userId'] = _userId;
     return map;
   }
+
+  @override
+  ApiModel fromJson(Map<String, dynamic> json) => fromJson(json,);
+
+  @override
+  List<Object?> get props => [id,title, completed,];
 
 }

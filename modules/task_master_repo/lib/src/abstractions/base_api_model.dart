@@ -6,7 +6,7 @@ import 'package:task_master_repo/src/resources/exceptions.dart';
 /// {@template api_response_model}
 /// Base api model interface
 /// {@endtemplate}
-class ApiResponseModel<T extends ApiSuccessModel> {
+class ApiResponseModel<T extends ApiModel> {
 
   /// {@macro api_response_model}
   ApiResponseModel(
@@ -47,48 +47,22 @@ class ApiResponseModel<T extends ApiSuccessModel> {
 /// {@template api_model}
 /// Base api model interface
 /// {@endtemplate}
-abstract class ApiSuccessModel extends Equatable {
+abstract class ApiModel extends Equatable {
 
   /// {@macro api_model}
-  const ApiSuccessModel({this.success = false, this.message,});
-
-  ///
-  factory ApiSuccessModel.error(
-      {required String message, int? code,}) = ApiErrorModel;
+  const ApiModel();
 
 
   ///
-  final bool success;
-
-  ///
-  final String? message;
-
-  ///
-  ApiSuccessModel fromJson(Map<String, dynamic> json);
+  ApiModel fromJson(Map<String, dynamic> json);
 
 }
 
 ///
-class ApiErrorModel extends ApiSuccessModel {
-
-  ///
-  factory ApiErrorModel({required String message, int? code}){
-    return ApiErrorModel._(
-      message: message,
-      code: code,
-    );
-  }
-
-  ///
-  // ignore: unused_element
-  const ApiErrorModel._({required String message, this.code})
-      : super(message: message, success: false,);
-
-  /// api error code from api
-  final int? code;
+class ApiErrorModel extends ApiModel {
 
   @override
-  ApiSuccessModel fromJson(Map<String, dynamic> json) {
+  ApiModel fromJson(Map<String, dynamic> json) {
     throw const AppException('Error using ErrorApiModel, use [ApiModel.error]');
   }
 

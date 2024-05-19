@@ -26,7 +26,7 @@ class TasksLoaded extends TasksState with EquatableMixin {
   }
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page ?? 0,];
 }
 
 class TasksLoading extends TasksState with EquatableMixin {
@@ -41,4 +41,15 @@ class TasksError extends TasksState with EquatableMixin {
   List<Object?> get props => [];
 
   final String message;
+}
+
+class TaskAddedState extends TasksState with EquatableMixin {
+  TaskAddedState({required this.task });
+
+  final TaskModel task;
+
+
+  @override
+  List<Object?> get props => [];
+
 }

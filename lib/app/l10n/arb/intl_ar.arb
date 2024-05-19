@@ -1,0 +1,33 @@
+
+{
+  "taskMaster" : "Task master",
+  "flutter": "Flutter",
+  "briefTaskDescription": "وصف موجز للمهمة",
+  "enterTaskTitle": "عنوان المهمه",
+  "welcomeBack" : " مرحباً من جديد",
+  "username": "اسم المستخدم",
+  "password": "كلمة المرور",
+  "continueWithTask": "متابعة",
+  "logIn": "تسجيل الدخول",
+  "rememberMe": "تذكرني",
+  "retry": "إعادة المحاولة",
+  "addTask": "إضافة مهمة",
+  "title": "العنوان",
+  "description": "التفاصيل",
+  "save": "حفظ",
+  "cancel": "إلغاء",
+  "task": "مهمه",
+  "date": "تاريخ",
+  "delete": "حذف",
+  "edit": "تعديل",
+  "finished": "منتهية",
+  "canceled": "ملغية",
+  "inProgress": "جارية",
+  "noTasks": "لا يوجد مهمات",
+  "@flutter": {
+    "description": "Displays text Flutter",
+    "type": "text",
+    "placeholders": {}
+  },
+  "completed": "Completed"
+}

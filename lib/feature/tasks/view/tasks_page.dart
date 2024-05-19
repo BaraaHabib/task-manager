@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:task_master/app/l10n/l10n.dart';
+import 'package:task_master/app/router/app_router.gr.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
 import 'package:task_master/feature/tasks/tasks.dart';
@@ -62,26 +63,45 @@ class _TasksViewState extends State<TasksView> {
         ),
       ),
       floatingActionButton: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          context.router.push(AddTaskPage()).then((value) {
+            if(value is TaskModel){
+              final index = pagingController.value
+                  .itemList?.indexOf(value) ?? -1;
+              if(index > -1){
+
+                pagingController.value
+                    .itemList?[index] = value;
+              }
+            }
+          });
+        },
         icon: Icon(
           color: context.theme.primaryColor,
           size: 75,
           Icons.add_circle,
         ),
       ),
-      body: BlocConsumer<TasksBloc, TasksState>(
+      body: BlocListener<TasksBloc, TasksState>(
         listener: _listener,
-        builder: (context, state) {
-          if (state is TasksLoading) {
-            return const LoadingWidget();
-          }
-          return Padding(
+        child:
+           Padding(
             padding: const EdgeInsets.all(12),
             child: PagedListView<int, TaskModel>(
               pagingController: pagingController,
               builderDelegate: PagedChildBuilderDelegate<TaskModel>(
                 itemBuilder: (context, item, index) => TaskItem(
                   task: item,
+                  onTaskUpdated: (task){
+                    final index = pagingController.value
+                        .itemList?.indexOf(task) ?? -1;
+                    if(index > -1){
+
+                      pagingController.value =
+                      pagingController.value
+                        ..itemList?[index] = task;
+                    }
+                  },
                 ),
                 firstPageProgressIndicatorBuilder: (
                   c,
@@ -103,8 +123,8 @@ class _TasksViewState extends State<TasksView> {
                 animateTransitions: true,
               ),
             ),
-          );
-        },
+          ),
+
       ),
     );
   }
@@ -128,11 +148,14 @@ class _TasksViewState extends State<TasksView> {
         );
       }
     }
-    if (state is TasksError) {
+    else if (state is TasksError) {
       showErrorSnackBar(
         context,
         state.message,
       );
+    }
+    else if (state is TaskAddedState) {
+      pagingController.refresh();
     }
   }
 
