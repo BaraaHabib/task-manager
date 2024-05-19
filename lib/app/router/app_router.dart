@@ -23,5 +23,10 @@ final class AppRouter extends $AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
         ),
+        CustomRoute(
+          page: AddTaskPage.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 300,
+        ),
       ];
 }

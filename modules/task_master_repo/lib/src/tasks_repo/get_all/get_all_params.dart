@@ -6,7 +6,11 @@ import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 class GetAllTasksParams extends ParamsModel<GetAllTasksParamsBody> {
 
   /// {@macro login_params}
-  const GetAllTasksParams({required this.limit, required this.skip,});
+  const GetAllTasksParams(
+      {required this.limit, required this.skip, required this.id,});
+
+  ///
+  final int id;
 
   ///
   final int limit;
@@ -21,13 +25,14 @@ class GetAllTasksParams extends ParamsModel<GetAllTasksParamsBody> {
   RequestType? get requestType => RequestType.get;
 
   @override
-  String? get url => 'todos';
+  String? get url => 'todos/user/$id';
 
   @override
-  Map<String, dynamic> get urlParams => {
-    'limit': limit,
-    'skip': skip,
-  };
+  Map<String, dynamic> get urlParams =>
+      {
+        'limit': limit,
+        'skip': skip,
+      };
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];

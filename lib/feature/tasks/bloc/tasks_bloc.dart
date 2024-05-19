@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:task_master/core/extensions/auth_extensions.dart';
 import 'package:task_master/core/extensions/tasks_extensions.dart';
 import 'package:task_master/locator.dart';
 import 'package:task_master_repo/task_manager_repo.dart';
@@ -12,15 +13,18 @@ part 'tasks_state.dart';
 
 const pageSize = 5;
 
-class TasksBloc extends Bloc<TasksEvent, TasksState> {
+class TasksBloc extends Bloc<BaseTasksListEvent, TasksState> {
   TasksBloc() : super(TasksLoading()) {
+    on<TaskAddedEvent>((event, emit) async {
+      emit(TaskAddedState(task: event.task,));
+    });
     on<TasksEvent>((event, emit) async {
       try {
         /// send locally stored data
         final localItems = Locator.storage.getParsedTasks(
           event.page,
         );
-        if (localItems != null) {
+        if (localItems != null && localItems.data.isNotEmpty) {
           emit(
             TasksLoaded(
               items: localItems.data,
@@ -37,6 +41,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
         final res = await Locator.repo.tasks.getAll(
           page: event.page,
           perPage: pageSize,
+          id: Locator.storage.getParsedUserData.id ?? 0,
         );
         if (res.success) {
           await Locator.storage.setTasks(
@@ -73,4 +78,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
       ),
     );
   }
+
+  void appendTask(TaskModel value) {
+    add(TaskAddedEvent(task: value));
+  }
+
 }

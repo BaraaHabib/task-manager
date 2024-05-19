@@ -22,14 +22,32 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addTask": MessageLookupByLibrary.simpleMessage("Add Task"),
+        "briefTaskDescription":
+            MessageLookupByLibrary.simpleMessage("Brief task description"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "canceled": MessageLookupByLibrary.simpleMessage("canceled"),
+        "completed": MessageLookupByLibrary.simpleMessage("Completed"),
         "continueWithTask":
             MessageLookupByLibrary.simpleMessage("continue with task"),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enterTaskTitle":
+            MessageLookupByLibrary.simpleMessage("Enter task title"),
+        "finished": MessageLookupByLibrary.simpleMessage("finished"),
         "flutter": MessageLookupByLibrary.simpleMessage("Flutter"),
+        "inProgress": MessageLookupByLibrary.simpleMessage("inProgress "),
         "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
         "noTasks": MessageLookupByLibrary.simpleMessage("No tasks yet"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember Me"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "task": MessageLookupByLibrary.simpleMessage("Task"),
         "taskMaster": MessageLookupByLibrary.simpleMessage("Task master"),
+        "title": MessageLookupByLibrary.simpleMessage("Title"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };

@@ -1,0 +1,32 @@
+{
+  "taskMaster" : "Task master",
+  "task": "Task",
+  "addTask": "Add Task",
+  "continueWithTask": "continue with task",
+  "briefTaskDescription": "Brief task description",
+  "enterTaskTitle": "Enter task title",
+  "flutter": "Flutter",
+  "welcomeBack" : "Welcome back!",
+  "username": "Username",
+  "password": "Password",
+  "logIn": "Log in",
+  "rememberMe": "Remember Me",
+  "retry": "Retry",
+  "title": "Title",
+  "description": "Description",
+  "save": "Save",
+  "cancel": "Cancel",
+  "date": "Date",
+  "delete": "Delete",
+  "edit": "Edit",
+  "finished": "finished",
+  "canceled": "canceled",
+  "inProgress": "inProgress ",
+  "noTasks": "No tasks yet",
+  "@flutter": {
+    "description": "Displays text Flutter",
+    "type": "text",
+    "placeholders": {}
+  },
+  "completed": "Completed"
+}

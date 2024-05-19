@@ -3,7 +3,7 @@ import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 /// {@template auth_repo}
 /// Auth repo responsible for authenticating users
 /// {@endtemplate}
-class LogInModel extends ApiSuccessModel {
+class LogInModel extends ApiModel {
 
   /// {@macro auth_repo}
   const LogInModel({
@@ -76,6 +76,6 @@ class LogInModel extends ApiSuccessModel {
       ];
 
   @override
-  ApiSuccessModel fromJson(Map<String, dynamic> json) =>
+  ApiModel fromJson(Map<String, dynamic> json) =>
       LogInModel.fromJson(json);
 }

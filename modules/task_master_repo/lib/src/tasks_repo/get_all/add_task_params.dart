@@ -1,21 +1,36 @@
 import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 
-/// {@template get_all_tasks_params}
-/// add to do api parameters
+/// {@template add_tasks_params}
+/// add task api parameters
+/// provide [id] when updating a task
 /// {@endtemplate}
-class AddTaskParams extends ParamsModel<AddTaskParamsBody> {
+class AddUpdateTaskParams extends ParamsModel<AddTaskParamsBody> {
 
-  /// {@macro login_params}
-  const AddTaskParams({super.body});
+  /// {@macro add_tasks_params}
+  const AddUpdateTaskParams({this.id, super.body});
+
+  /// send task id when we are updating a task
+  final int? id;
 
   @override
   Map<String, String> get additionalHeaders => {};
 
   @override
-  RequestType? get requestType => RequestType.get;
+  RequestType? get requestType {
+    if(id != null) {
+      return RequestType.put;
+    }
+    return RequestType.post;
+  }
 
   @override
-  String? get url => 'todos/add';
+  String? get url {
+    var url = 'todos/add';
+    if(id != null) {
+      url = 'todos/$id';
+    }
+    return url;
+  }
 
   @override
   Map<String, String> get urlParams => {};
@@ -46,9 +61,10 @@ class AddTaskParamsBody extends BaseBodyModel {
   final int userId;
 
   @override
-  Map<String, dynamic> toJson() => {
-    'todo' : todo,
-    'completed' : completed,
-    'userId' : userId,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        'todo': todo,
+        'completed': completed,
+        'userId': userId,
+      };
 }

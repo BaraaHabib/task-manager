@@ -1,6 +1,7 @@
 /// Module that holds api repositories and api connection layer
 library;
 
+export 'src/abstractions/base_api_model.dart';
 export 'src/auth_repo/models/log_in_model.dart';
 export 'src/network/auth_interceptor.dart';
 export 'src/network/network_client.dart';
