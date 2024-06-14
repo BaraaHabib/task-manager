@@ -18,22 +18,10 @@ class TasksBloc extends Bloc<BaseTasksListEvent, TasksState> {
     on<TaskAddedEvent>((event, emit) async {
       emit(TaskAddedState(task: event.task,));
     });
-    on<TasksEvent>((event, emit) async {
+    on<GetTasksEvent>((event, emit) async {
       try {
-        /// send locally stored data
-        final localItems = Locator.storage.getParsedTasks(
-          event.page,
-        );
-        if (localItems != null && localItems.data.isNotEmpty) {
-          emit(
-            TasksLoaded(
-              items: localItems.data,
-              page: event.page,
-            ),
-          );
-        } else {
-          emit(TasksLoading());
-        }
+
+        emit(TasksLoading());
 
         ///
 
@@ -73,7 +61,7 @@ class TasksBloc extends Bloc<BaseTasksListEvent, TasksState> {
 
   void getTasks([int page = 0]) {
     add(
-      TasksEvent(
+      GetTasksEvent(
         page: page,
       ),
     );
@@ -82,5 +70,7 @@ class TasksBloc extends Bloc<BaseTasksListEvent, TasksState> {
   void appendTask(TaskModel value) {
     add(TaskAddedEvent(task: value));
   }
+
+  // getTasksCallBa
 
 }

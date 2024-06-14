@@ -19,6 +19,7 @@ class App extends StatelessWidget {
       create: (_) => AppStateCubit(),
       child: ScreenUtilInit(
         minTextAdapt: true,
+        designSize: const Size(375, 667),
         useInheritedMediaQuery: true,
         builder: (_, child) => MaterialApp.router(
           // App Name

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:task_master/app/l10n/l10n.dart';
 import 'package:task_master/app/router/app_router.gr.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
+import 'package:task_master/core/listing/listing_state.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
 import 'package:task_master/feature/tasks/tasks.dart';
 import 'package:task_master_repo/task_manager_repo.dart';
@@ -20,7 +23,7 @@ class TasksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => TasksBloc()..getTasks(),
+      create: (_) => TasksBloc(),
       child: const TasksView(),
     );
   }
@@ -38,12 +41,30 @@ class _TasksViewState extends State<TasksView> {
     firstPageKey: 0,
   );
 
+  late StreamSubscription<TasksState> listingSubscription;
+
   @override
   void initState() {
-    pagingController.addPageRequestListener(
-      context.read<TasksBloc>().getTasks,
-    );
     super.initState();
+    final bloc = context.read<TasksBloc>();
+    pagingController.addPageRequestListener(
+      bloc.getTasks,
+    );
+    listingSubscription = bloc.stream
+        .listen((state) {
+
+      if (state is TasksLoaded) {
+        if(state.items.isEmpty){
+          pagingController.appendLastPage(state.items,);
+        }else{
+          pagingController.appendPage(state.items, state.page + 1);
+        }
+      }
+
+      if (state is TasksError) {
+        pagingController.error = state.message;
+      }
+    });
   }
 
   @override
@@ -87,40 +108,32 @@ class _TasksViewState extends State<TasksView> {
         child:
            Padding(
             padding: const EdgeInsets.all(12),
-            child: PagedListView<int, TaskModel>(
-              pagingController: pagingController,
-              builderDelegate: PagedChildBuilderDelegate<TaskModel>(
-                itemBuilder: (context, item, index) => TaskItem(
-                  task: item,
-                  onTaskUpdated: (task){
-                    final index = pagingController.value
-                        .itemList?.indexOf(task) ?? -1;
-                    if(index > -1){
+            child: RefreshIndicator(
+              onRefresh: () => Future.sync(
+                pagingController.refresh,
+              ),
+              child:
+              CustomScrollView(
+                slivers: [
+                  PagedSliverList<int, TaskModel>(
+                    pagingController: pagingController,
+                    builderDelegate: PagedChildBuilderDelegate<TaskModel>(
+                      itemBuilder: (context, item, index) => TaskItem(
+                        task: item,
+                        onTaskUpdated: (task){
+                          final index = pagingController.value
+                              .itemList?.indexOf(task) ?? -1;
+                          if(index > -1){
 
-                      pagingController.value =
-                      pagingController.value
-                        ..itemList?[index] = task;
-                    }
-                  },
-                ),
-                firstPageProgressIndicatorBuilder: (
-                  c,
-                ) =>
-                    const CircularProgressIndicator(),
-                newPageProgressIndicatorBuilder: (
-                  c,
-                ) =>
-                    const CircularProgressIndicator(),
-                firstPageErrorIndicatorBuilder: (c) => AppErrorWidget(
-                  message: context.l10n.noTasks,
-                  retryCallback: pagingController.refresh,
-                ),
-                newPageErrorIndicatorBuilder: (c) => AppErrorWidget(
-                  message: context.l10n.noTasks,
-                  retryCallback: pagingController.refresh,
-                ),
-                noItemsFoundIndicatorBuilder: (c) => const AppEmptyWidget(),
-                animateTransitions: true,
+                            pagingController.value =
+                            pagingController.value
+                              ..itemList?[index] = task;
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -130,37 +143,13 @@ class _TasksViewState extends State<TasksView> {
   }
 
   void _listener(BuildContext ctx, TasksState state) {
-    if (state is TasksLoaded) {
-      final currentPage = state.page ?? 0;
-      final items = state.items ?? [];
-      final isLastPage = state.items!.length < pageSize;
-      if (isLastPage) {
-        pagingController.appendLastPage(state.items!);
-      } else {
-        final nextPageKey = currentPage + 1;
-        pagingController.appendPage(items, nextPageKey);
-      }
 
-      if (state.local) {
-        showSuccessSnackBar(
-          context,
-          'Offline mode',
-        );
-      }
-    }
-    else if (state is TasksError) {
-      showErrorSnackBar(
-        context,
-        state.message,
-      );
-    }
-    else if (state is TaskAddedState) {
-      pagingController.refresh();
-    }
+
   }
 
   @override
   void dispose() {
+    listingSubscription.cancel();
     pagingController.dispose();
     super.dispose();
   }

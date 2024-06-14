@@ -30,26 +30,26 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-      key: context.read<LoginCubit>().formState,
-      initialValue: {
-        LogInFieldNames.userName.name: 'atuny0',
-        LogInFieldNames.password.name: '9uQFF1Lh',
-      },
-      child: BlocConsumer<LoginCubit, LoginState>(
-        listenWhen: _stateHasChanged,
-        listener: _listener,
-        buildWhen: _stateChanged,
-        builder: (context, state) {
-          return Scaffold(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listenWhen: _stateHasChanged,
+      listener: _listener,
+      buildWhen: _stateChanged,
+      builder: (context, state)  {
+        return FormBuilder(
+          key: context.read<LoginCubit>().formState,
+          enabled: !state.loading,
+          initialValue: {
+            LogInFieldNames.userName.name: 'emilys',
+            LogInFieldNames.password.name: 'emilyspass',
+          },
+          child: Scaffold(
             body: Center(
               child: Container(
-                padding: const EdgeInsets.all(20),
-                child: ListView(
+                padding: EdgeInsets.all(20.r),
+                child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
-                  shrinkWrap: true,
                   children: [
-                    const SizedBox(height: 20),
+                    const Spacer(),
 
                     // Welcome Back Text
                     Text(
@@ -59,7 +59,7 @@ class LoginView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    30.verticalSpace,
 
                     // Username TextField
                     Row(
@@ -75,7 +75,7 @@ class LoginView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 15),
+                    15.verticalSpace,
 
                     // Password TextField
                     Row(
@@ -92,27 +92,33 @@ class LoginView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 25),
+                    25.verticalSpace,
 
                     // Login Button
-                    PrimaryButton(
-                      key: const ValueKey('login'),
-                      onPressed: context.read<LoginCubit>().logIn,
-                      loading: state.loading,
-                      content: Text(
-                        context.l10n.logIn,
-                        style: context.textTheme.labelLarge,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                            key: const ValueKey('login'),
+                            onPressed: context.read<LoginCubit>().logIn,
+                            loading: state.loading,
+                            content: Text(
+                              context.l10n.logIn,
+                              style: context.textTheme.labelLarge,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
 
-                    const SizedBox(height: 20),
+                    const Spacer(),
                   ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

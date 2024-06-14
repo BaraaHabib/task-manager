@@ -1,8 +1,8 @@
 part of 'tasks_bloc.dart';
 
 abstract class BaseTasksListEvent extends Equatable {}
-class TasksEvent extends BaseTasksListEvent {
-  TasksEvent({this.page = 1});
+class GetTasksEvent extends BaseTasksListEvent {
+  GetTasksEvent({this.page = 1});
 
   final int page;
 

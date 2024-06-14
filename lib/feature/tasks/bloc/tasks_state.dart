@@ -6,24 +6,14 @@ abstract class TasksState extends Equatable {
 
 class TasksLoaded extends TasksState with EquatableMixin {
   const TasksLoaded({
-    this.items,
+    this.items = const [],
     this.page = 0,
     this.local = false,
   });
 
-  final List<TaskModel>? items;
-  final int? page;
+  final List<TaskModel> items;
+  final int page;
   final bool local;
-
-  ///
-  TasksLoaded appendItems({
-    List<TaskModel>? data,
-  }) {
-    return TasksLoaded(
-      items: data,
-      page: page,
-    );
-  }
 
   @override
   List<Object> get props => [page ?? 0,];

@@ -230,7 +230,7 @@ final class NetworkClient {
 
       return ApiResponseModel.error(
         // ignore: avoid_dynamic_calls
-        message: e.response?.data['error'] as String? ?? e.message,);
+        message: e.response?.data['message'] as String? ?? e.message,);
     } on Exception catch (e) {
       return ApiResponseModel.error(message: e.toString(),);
     } finally {}

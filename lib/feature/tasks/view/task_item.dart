@@ -14,7 +14,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(15.r,),
       onTap: (){
         context.router.push(AddTaskPage(task: task,))
             .then((value) {
@@ -31,7 +31,7 @@ class TaskItem extends StatelessWidget {
           vertical: 5.h,
         ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(15.r),
             border: Border.all(
               color: Colors.black.withAlpha(
                 50,
