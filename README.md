@@ -48,6 +48,15 @@ _\*Task Master works on iOS, Android, Web, and Windows._
 
 ---
 
+## Running unit test 🚀
+This uses BLoC State management test package:
+
+# SplashCubit unit testing
+```sh
+$ flutter test --plain-name "Test Splash authenticated, not authenticated"
+```
+
+
 ```sh
 $ flutter test --coverage --test-randomize-ordering-seed random
 ```
@@ -71,46 +80,6 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 ### Adding Strings
 
 1. To add a new localizable string, open the `app_en.arb` file at `lib/l10n/arb/app_en.arb`.
-
-```arb
-{
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
-}
-```
-
-### Adding Supported Locales
-
-Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
-
-```xml
-    ...
-
-    <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-	</array>
-
-    ...
-```
-
-### Adding Translations
-
-1. For each supported locale, add a new ARB file in `lib/l10n/arb`.
-
-```
-├── l10n
-│   ├── arb
-│   │   ├── app_en.arb
-│   │   └── app_ar.arb
-```
-
-2. Add the translated strings to each `.arb` file:
-
-`app_en.arb`
 
 ```arb
 {
