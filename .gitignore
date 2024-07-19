@@ -51,5 +51,7 @@ pubspec_overrides.yaml
 # environment variables
 # /environment/
 
-
 /lib/app/router/app_router.gr.dart
+
+# FVM Version Cache
+.fvm/

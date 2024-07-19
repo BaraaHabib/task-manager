@@ -14,8 +14,6 @@ final class LightTheme extends BaseTheme {
       primary: primaryColor,
       secondary: secondaryColor,
       surface: Colors.white,
-      // Background color
-      background: Colors.white,
       error: Colors.red,
       // Assume red for errors
       onPrimary: Colors.white,
@@ -23,8 +21,6 @@ final class LightTheme extends BaseTheme {
       onSecondary: Colors.black,
       // Text/icon color on secondary
       onSurface: Colors.black,
-      // Text/icon color on surface
-      onBackground: Colors.black,
       // Text/icon color on background
       onError: Colors.white,
       // Text/icon color on error

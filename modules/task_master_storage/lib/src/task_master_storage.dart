@@ -2,9 +2,9 @@
 import 'dart:convert';
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'constants.dart';
-part 'state/state_utils.dart';
 part 'tasks/tasks_utils.dart';
 
 /// {@template task_master_storage}
@@ -32,10 +32,26 @@ class TaskMasterStorage  {
 
   /// initialize [TaskMasterStorage]
   Future<TaskMasterStorage> init() async {
-    await Hive.initFlutter();
+    final appDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDir.path);
     await Hive.openBox(_stateBox);
     await Hive.openBox(_tasksBox);
     _instance = TaskMasterStorage();
     return _instance!;
   }
+
+
+  /// get session data as json
+  Map<String, dynamic>? get getUserData {
+    final sJson = appState.get(_tasks,) as String?;
+    if (sJson is String) {
+      return json.decode(sJson) as Map<String, dynamic>;
+    }
+    return null;
+  }
+
+  /// set session token
+  Future<void> setUserData(String? data) async =>
+      appState.put(_token, data);
+
 }

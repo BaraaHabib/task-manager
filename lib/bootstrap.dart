@@ -10,6 +10,7 @@ import 'package:task_master/core/utils/device_info/device_info_utils.dart';
 import 'package:task_master/core/utils/package_info/package_info_utils.dart';
 import 'package:task_master/locator.dart';
 
+
 Future<void> bootstrap({required FutureOr<Widget> Function() builder, required AppEnvironment environment}) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
@@ -23,11 +24,7 @@ Future<void> bootstrap({required FutureOr<Widget> Function() builder, required A
             : await getTemporaryDirectory(),
       );
       // Initialize Locator and Utils
-      await Future.wait([
-        Locator.locateServices(environment: environment),
-        PackageInfoUtils.init(),
-        DeviceInfoUtils.init(),
-      ]);
+      await initServices(environment: environment,);
 
       runApp(await builder());
     },
@@ -35,4 +32,12 @@ Future<void> bootstrap({required FutureOr<Widget> Function() builder, required A
       log(error.toString(), stackTrace: stackTrace);
     },
   );
+}
+
+Future<void> initServices({required AppEnvironment environment,}) async {
+  await Future.wait([
+    Locator.locateServices(environment: environment),
+    PackageInfoUtils.init(),
+    DeviceInfoUtils.init(),
+  ]);
 }

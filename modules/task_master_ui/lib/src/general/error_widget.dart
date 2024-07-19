@@ -9,8 +9,7 @@ class AppErrorWidget extends StatelessWidget {
 
   /// {@macro error_widget}
   const AppErrorWidget({
-    this.message = '',
-    required this.retryCallback,
+    required this.retryCallback, this.message = '',
     this.width = 250,
     this.buttonLabel,
     this.height = 300,

@@ -5,6 +5,7 @@ import 'package:task_master/app/router/app_router.gr.dart';
 
 /// Holds all the routes that are defined in the app
 /// Used to generate the Router object
+/// dart run build_runner build
 final class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes =>

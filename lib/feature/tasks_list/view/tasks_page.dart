@@ -9,11 +9,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:task_master/app/l10n/l10n.dart';
 import 'package:task_master/app/router/app_router.gr.dart';
 import 'package:task_master/core/extensions/context_extensions.dart';
-import 'package:task_master/core/listing/listing_state.dart';
 import 'package:task_master/feature/app_state/app_state.dart';
-import 'package:task_master/feature/tasks/tasks.dart';
+import 'package:task_master/feature/tasks_list/tasks.dart';
 import 'package:task_master_repo/task_manager_repo.dart';
-import 'package:task_master_ui/task_master_ui.dart';
 part './task_item.dart';
 
 @RoutePage()

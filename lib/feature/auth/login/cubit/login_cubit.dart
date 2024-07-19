@@ -13,19 +13,21 @@ class LoginCubit extends Cubit<LoginState> {
 
   final formState = GlobalKey<FormBuilderState>();
 
-  Future<void> logIn() async {
-    if (formState.currentState?.validate() ?? false) {
+  Future<void> logIn({String? userName, String? password, }) async {
+    final validated = (userName, password) != (null, null);
+
+    if (validated || (formState.currentState?.validate() ?? false)) {
       emit(
         state.copyWith(
           status: LogInStatusEnum.loading,
         ),
       );
       final values = formState.currentState?.instantValue;
-      final userName = values?[LogInFieldNames.userName.name] as String;
-      final password = values?[LogInFieldNames.password.name] as String;
+      userName = values?[LogInFieldNames.userName.name] as String? ?? userName;
+      password = values?[LogInFieldNames.password.name] as String? ?? password;
       final res = await Locator.repo.auth.logIn(
-        userName: userName,
-        password: password,
+        userName: userName ?? '',
+        password: password ?? '',
       );
 
       if (res.success) {

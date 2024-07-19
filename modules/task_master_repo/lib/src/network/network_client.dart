@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:task_master_repo/src/abstractions/base_api_model.dart';
 import 'package:task_master_repo/src/abstractions/base_params_model.dart';
 import 'package:task_master_repo/src/resources/configuration.dart';
 import 'package:task_master_repo/src/resources/exceptions.dart';

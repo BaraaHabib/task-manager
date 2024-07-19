@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:task_master/core/extensions/auth_extensions.dart';
-import 'package:task_master/core/extensions/tasks_extensions.dart';
 import 'package:task_master/locator.dart';
 import 'package:task_master_repo/task_manager_repo.dart';
 import 'package:task_master_storage/task_master_storage.dart';

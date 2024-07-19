@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -24,19 +26,23 @@ abstract final class Locator {
   /// Responsible for registering all the dependencies
   static Future<void> locateServices(
       {required AppEnvironment environment,}) async {
-    final taskMasterStorage = await TaskMasterStorage().init();
-    instance
-    // register local storage service
-      ..registerLazySingleton(() => taskMasterStorage,)
-    // register app repository
-      ..registerLazySingleton(() =>
-          TaskManagerRepo(
-              withLogging: kDebugMode,
-              taskMasterStorage: instance(),
-              baseUrl: environment.baseUrl,
-          ),
-      )
-    // Client Dependencies
-      ..registerFactory(Dio.new);
+    try {
+      final taskMasterStorage = await TaskMasterStorage().init();
+      instance
+      // register local storage service
+        ..registerLazySingleton(() => taskMasterStorage,)
+      // register app repository
+        ..registerLazySingleton(() =>
+            TaskManagerRepo(
+                withLogging: kDebugMode,
+                taskMasterStorage: instance(),
+                baseUrl: environment.baseUrl,
+            ),
+        )
+      // Client Dependencies
+        ..registerFactory(Dio.new);
+    } on Exception catch (e) {
+      log(e.toString(),);
+    }
   }
 }

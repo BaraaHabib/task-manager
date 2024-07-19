@@ -38,7 +38,7 @@ class AddTaskView extends StatelessWidget {
           ctx.router.maybePop(state.taskModel,);
         }
         else if(state is AddUpdateTaskError){
-          showErrorSnackBar(context, state.message ??'');
+          showErrorSnackBar(context, state.message);
         }
       },
       builder: (context, state) {

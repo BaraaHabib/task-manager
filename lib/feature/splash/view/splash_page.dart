@@ -6,6 +6,7 @@ import 'package:task_master/app/router/app_router.gr.dart';
 import 'package:task_master/core/assets/general_assets.dart';
 
 import 'package:task_master/feature/splash/splash.dart';
+import 'package:task_master/locator.dart';
 
 @RoutePage()
 class SplashPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SplashCubit()..init(),
+      create: (_) => SplashCubit(storage: Locator.storage,)..init(),
       child: const SplashView(),
     );
   }
